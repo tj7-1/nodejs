@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="index.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="main">
+    <div id="quotes"></div>
+    <div id="author"></div>
+    <button id="newQ">new quotes</button>
+</div>
+    </div>
+</body>
+<script>
+    const quotes = document.getElementById("quotes");
+    const author = document.getElementById("author");
+    const newQ = document.getElementById("newQ");
+    let realData = "";
+    let quotesData = "";
+
+    const Textcopy = () => {
+        let tweetPost = `https://twitter.com/intent/tweet?text=${quotesdata.text}`; //this is the tweet path and the :  ?text=${quotesdata.text}  this helps in copying that quote which is displayed on the server that time in the tweet post. 
+        window.open(tweetPost);     //this helps in opening the window for tweet page.
+    };
+
+    const getNewQuotes = () => {
+        let rndm = Math.floor(Math.random() * 20);       //let rndm = Math.random()*4;   : this will generate a random number till 10.
+        quotesData = realData[rndm];
+        console.log(realData[rndm].author);
+        quotes.innerText = `${quotesData.text}`;
+        quotesData.author == null ? (author.innerText = "unknown") : (author.innerText = `${quotesData.author}`);
+    };
+
+    const getQuotes = async () => {     //using async
+        const api = "https://type.fit/api/quotes";
+        try {
+            let data = await fetch(api);     //await here means wait till we get the data.
+            realData = await data.json();
+            //console.log(realData);      //we can also write this to get only the text of first line : console.log(realData[0].text); 
+            // console.log(realData[0].text); 
+            // console.log(realData[0].author); 
+            getNewQuotes();
+        } catch (error) { }
+    };
+    newQ.addEventListener('click', getNewQuotes);        //this means that when we click on button having id= newQ we call function getNewQuotes.
+    getQuotes();
+</script>
+
+</html>

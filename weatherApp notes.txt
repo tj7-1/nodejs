@@ -1,0 +1,3 @@
+d0052772a2500e286668db393e135749
+api.openweathermap.org/data/2.5/weather?q=delhi&appid=d0052772a2500e286668db393e135749
+
